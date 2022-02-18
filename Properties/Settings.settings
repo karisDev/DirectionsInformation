@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="DirectionsInformation.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Points" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Chicago;New York;Philadelphia;Seattle;Dallas;Los Angeles;San Francisco;Miami</Value>
+    </Setting>
+    <Setting Name="Timers" Type="System.String" Scope="User">
+      <Value Profile="(Default)">8:00;15:00;19:00</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
