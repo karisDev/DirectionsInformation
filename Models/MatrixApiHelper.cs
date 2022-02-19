@@ -64,7 +64,7 @@ namespace DirectionsInformation.Models
 
                 for (int column = 0; column < destinations.Length; column++)
                 {
-                    if (destinations[row] == destinations[column]) // ставим прочерк, если точка отправления совпадает с точкой назначения
+                    if (row == column) // ставим прочерк, если точка отправления совпадает с точкой назначения
                         csvString += "-,";
                     else
                     {
