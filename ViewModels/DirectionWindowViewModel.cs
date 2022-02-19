@@ -182,7 +182,6 @@ namespace DirectionsInformation.ViewModels
                 return;
             }
 
-            // сохранение логов
             string csvText = matrixApiHelper.QuerryToCsvString();
             if (!CsvHelper.SaveNearExecutable(csvText))
                 MessageBox.Show("Ошибка при создании логов в корне программы. Возможно у программы недостаточно прав.");
@@ -259,16 +258,15 @@ namespace DirectionsInformation.ViewModels
             MakeRequestCommand = new LambdaCommand(OnMakeRequestCommandExecuted);
             OpenFolderCommand = new LambdaCommand(OnOpenFolderCommandExecuted);
             notifyIcon = _notifyIcon;
+            
+            if (AppConstants.Timers == null) return;
+
+            timers = new TimedExecution(AppConstants.Timers, MakeNewRequest);
+            timers.Start();
 
             _TimeString1 = AppConstants.Timers[0];
             _TimeString2 = AppConstants.Timers[1];
             _TimeString3 = AppConstants.Timers[2];
-
-            if (ValidateTimeFormat())
-            {
-                timers = new TimedExecution(GetCheckedTimersList(), MakeNewRequest);
-                timers.Start();
-            }
         }
     }
 }
