@@ -29,7 +29,7 @@ namespace DirectionsInformation.Models
 
         public async Task ExecuteQuerry()
         {
-            string apiKey = "AIzaSyA5TUjA0llTsdyMfY75JOPydyjyUcRjGyA"; // вы видите этот ключ не потому что я его случайно слил, а потому что он для меня бесплатный)
+            string apiKey = "AIzaSyCtEfXlGJUrgmnD6vA6Y4EM0PbZyA3-_v4"; // вы видите этот ключ не потому что я его случайно слил, а потому что он для меня бесплатный)
             string convertedPoints = ArrayToStringConverter(Locations);
 
             string url = "https://maps.googleapis.com/maps/api/distancematrix/json" +
@@ -65,7 +65,7 @@ namespace DirectionsInformation.Models
                 for (int column = 0; column < destinations.Length; column++)
                 {
                     if (row == column) // ставим прочерк, если точка отправления совпадает с точкой назначения
-                        csvString += "-,";
+                        csvString += "0,";
                     else
                     {
                         // API не вернет значения расстояния или времени, если они слишком большие

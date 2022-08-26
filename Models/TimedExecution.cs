@@ -41,7 +41,10 @@ namespace DirectionsInformation.Models
             foreach (string time in TimersList)
             {
                 string dateStr = time;
-                DateTime dateTime = DateTime.ParseExact(dateStr, "H:mm", null, System.Globalization.DateTimeStyles.None);
+                DateTime dateTime;
+                
+                dateTime = DateTime.ParseExact(dateStr, "H:mm", null, System.Globalization.DateTimeStyles.None);
+
                 if (dateTime < DateTime.Now)
                     dateTime = dateTime.AddDays(1);
                 

@@ -16,9 +16,6 @@ namespace DirectionsInformation.ViewModels
 {
     class DirectionWindowViewModel : ViewModel
     {
-
-        const int AMOUNT_OF_TIMERS = 3; // количество таймеров
-
         TimedExecution timers;
         #region Переменные
         #region Заголовок окна
@@ -58,26 +55,46 @@ namespace DirectionsInformation.ViewModels
         #endregion
 
         #region TimeChecked
-        private bool[] _CheckedTimers = new bool[AMOUNT_OF_TIMERS] { true, true, true };
+        // к сожалению привязка данных к интерфейсу не может работать через массив
+        private bool _TimeChecked1 = true;
+        private bool _TimeChecked2 = true;
+        private bool _TimeChecked3 = true;
+        public bool TimeChecked1
+        {
+            get => _TimeChecked1;
+            set => Set(ref _TimeChecked1, value);
+        }
+        public bool TimeChecked2
+        {
+            get => _TimeChecked2;
+            set => Set(ref _TimeChecked2, value);
+        }
+        public bool TimeChecked3
+        {
+            get => _TimeChecked3;
+            set => Set(ref _TimeChecked3, value);
+        }
         #endregion
 
         #region TimeString
-        private string[] _TimeString = new string[AMOUNT_OF_TIMERS];
+        private string _TimeString1;
+        private string _TimeString2;
+        private string _TimeString3;
 
         public string TimeString1
         {
-            get => _TimeString[0];
-            set => Set(ref _TimeString[0], value);
+            get => _TimeString1;
+            set => Set(ref _TimeString1, value);
         }
         public string TimeString2
         {
-            get => _TimeString[1];
-            set => Set(ref _TimeString[1], value);
+            get => _TimeString2;
+            set => Set(ref _TimeString2, value);
         }
         public string TimeString3
         {
-            get => _TimeString[2];
-            set => Set(ref _TimeString[2], value);
+            get => _TimeString3;
+            set => Set(ref _TimeString3, value);
         }
         #endregion
 
@@ -166,7 +183,7 @@ namespace DirectionsInformation.ViewModels
                 MessageBox.Show("У программы нет доступа к интернету.");
                 return;
             }
-
+            
             string csvText = matrixApiHelper.QuerryToCsvString();
             if (!CsvHelper.SaveNearExecutable(csvText))
                 MessageBox.Show("Ошибка при создании логов в корне программы. Возможно у программы недостаточно прав.");
@@ -181,11 +198,9 @@ namespace DirectionsInformation.ViewModels
         private List<string> GetCheckedTimersList()
         {
             var result = new List<string>();
-            for (int i = 0; i < AMOUNT_OF_TIMERS; i++)
-            {
-                if (_CheckedTimers[i])
-                result.Add(_TimeString[i]);
-            }
+            if (_TimeChecked1) result.Add(_TimeString1);
+            if (_TimeChecked2) result.Add(_TimeString2);
+            if (_TimeChecked3) result.Add(_TimeString3);
 
             return result;
         }
@@ -221,10 +236,9 @@ namespace DirectionsInformation.ViewModels
 
         private void SaveSettings()
         {
-            for (int i = 0; i < AMOUNT_OF_TIMERS; i++)
-            {
-                AppConstants.Timers[i] = _TimeString[i];
-            }    
+            AppConstants.Timers[0] = _TimeString1;
+            AppConstants.Timers[1] = _TimeString2;
+            AppConstants.Timers[2] = _TimeString3;
             AppConstants.Points = Locations.Split('\n').ToList();
 
             AppConstants.Save();
